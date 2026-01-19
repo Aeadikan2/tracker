@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="history-page">
+    <header class="page-header">
+        <h1>Income History</h1>
+        <p class="subtitle">A record of all your income entries and splits</p>
+    </header>
+
+    <div class="table-container">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th>Savings</th>
+                    <th>Expenses</th>
+                    <th>Investments</th>
+                    <th>Discretionary</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in entries %}
+                <tr>
+                    <td>{{ entry.date }}</td>
+                    <td class="font-bold">₦{{ "%.2f"|format(entry.amount) }}</td>
+                    <td>₦{{ "%.2f"|format(entry.savings) }}</td>
+                    <td>₦{{ "%.2f"|format(entry.expenses) }}</td>
+                    <td>₦{{ "%.2f"|format(entry.investments) }}</td>
+                    <td>₦{{ "%.2f"|format(entry.discretionary) }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6" class="text-center">No history available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
